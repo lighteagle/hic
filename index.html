@@ -131,8 +131,6 @@
             return L.marker(latlng, {
               icon: L.icon({
                 iconUrl: "assets/marker/redmarkerpeople48.png", 
-				iconUrl: "assets/marker/greenicon.png", 
-				iconUrl: "assets/marker/redicon.png", 
                 iconSize: [48, 48], 
                 iconAnchor: [24, 48], 
                 popupAnchor: [0, -48], 
@@ -140,7 +138,7 @@
               })
             });
           },
-      
+		
           onEachFeature: function (feature, layer) {
             if (feature.properties) {
             
@@ -151,6 +149,7 @@
                 "<tr><th>Keterangan</th><td>" + feature.properties.keterangan + "</td></tr>" +
                 "<tr><th>Foto</th><td><img src='" + feature.properties.foto + "' width='200' alt='Tidak ada'/></td></tr>" +
                 "<tr><th>Kontributor</th><td>" + feature.properties.kontributor + "</td></tr>" +
+				"<a href='https://www.google.com/maps/dir/?api=1&destination=" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + "&travelmode=driving' target='_blank' class='btn btn-info' title='Klik untuk menuju lokasi'>Rute dari lokasi Anda</a>";
 				"</table>";
               layer.on({
                   click: function (e) {
@@ -162,22 +161,24 @@
             }
           }
         });
+		
         $.getJSON("data/spreadsheetpoint.php", function (data) {
           point.addData(data);
           map.addLayer(point); 
-          map.fitBounds(point.getBounds());
+          //map.fitBounds(point.getBounds());
         });
-        
-        
+     
+
         var baseMaps = {
           'Google Terrain': basemap0,
           'Google Satellite': basemap1,
         };
         var Layers = {
-          'Tempat Ibadah<br>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/marker/greenicon.png" width="12"> Masjid<br>&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/marker/redicon.png" width="12"> Musholla': point,
+		  'Masjid': point,
+		  'Musholla': point,
 		  'Katering': point,
 		  'Makanan Halal': point,
-          'Traffic': traffic,
+          'Traffic': traffic
 		  
         }
         var layerControl = L.control.layers(baseMaps, Layers, {collapsed:true});

@@ -29,16 +29,17 @@ if ( !$error && (($handle = fopen($googleSpreadsheetUrl, "r")) !== FALSE) )
       'geometry' => array(
         'type'   => 'Point',
         'coordinates' => array(
-          (float) $csvRow[1], // longitude, casted to type float
-          (float) $csvRow[2]  // latitude, casted to type float
+          (float) $csvRow[2], // longitude, casted to type float
+          (float) $csvRow[1]  // latitude, casted to type float
         )
       ),
       'properties' => array(
         'nama' => $csvRow[3],
-        'deskripsi' => $csvRow[4],
-        'keterangan' => $csvRow[5],
-		'foto' => $csvRow[6],
-		'kontributor' => $csvRow[7],
+		'kategori' => $csvRow[4],
+        'deskripsi' => $csvRow[5],
+        'keterangan' => $csvRow[6],
+		'foto' => $csvRow[7],
+		'kontributor' => $csvRow[8],
       )
     );
   } // end while, loop through CSV data
